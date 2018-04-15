@@ -8,6 +8,7 @@ function createSpreadsheetsDBManager(url,sheet_name) {
   return new SpreadsheetsDBManager(url,sheet_name);
 }
 
+
 /**
  * This method is used to set a FormatDate.
  * @param {string} timezone  time zone
@@ -115,6 +116,22 @@ function destroy(id){
   throw new Error("this method should not call direct, please call create method.");
 }
 
+/**
+ * This method is add column.
+ * @param {string} name column name
+ */
+function addColumn(name){
+  throw new Error("this method should not call direct, please call create method.");
+}
+
+/**
+ * This method is delete column.
+ * @param {string} name column name
+ */
+function deleteColumn(name){
+  throw new Error("this method should not call direct, please call create method.");
+}
+      
 /**
  * This method is save db to spreadsheet.
  */
@@ -300,6 +317,18 @@ function update(record){
       var cols = table[0].length;
       
       this.sheet.getRange(1,1,rows,cols).setValues(table);
+    },
+    
+    addColumn:function(name){
+      for(i in this.db){
+        this.db[i][name] = '';
+      }
+    },
+    
+    deleteColumn:function(name){
+      for(i in this.db){
+        delete this.db[i][name];
+      }
     },
     
     update: function(record){
